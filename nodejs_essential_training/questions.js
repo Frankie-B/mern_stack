@@ -24,7 +24,6 @@ ask();
 
 /* process.stdin*/
 
-
 const answers = [];
 // add process event listener for input data event
 process.stdin.on('data', data => {
