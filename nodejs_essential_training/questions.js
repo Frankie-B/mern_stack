@@ -1,49 +1,37 @@
-// stdin and stdout allow us to communicate with the global process while
-// it is running.
+const readline = require('readline');
+// create readline interface for question to be asked in the terminal
+const rl = readline.createInterface({
+	input: process.stdin,
+	output: process.stdout
+});
 
-/* process.stdin and process.stdout*/
-
-/* process.stdout is a writeable stream that implements a .write() method
-*  which can be used to write a string to the console.*/
-
-process.stdout.write('Hello ');
-process.stdout.write('world \n\n\n');
 
 const questions = [
 	'what is your name?',
 	'what would you rather be doing?',
-	'what is your favourite programming language?',
+	'what are you going to do with nodejs?',
 ];
+		// Takes questions
+const collectAnswers = (questions, done) => {
+	const answers = [];
+	// Destructure the questions
+	const [firstQuestion] = questions;
 
-const ask = (i = 0) => {
-	process.stdout.write(`\n\n\n ${questions[i]}`);
-	process.stdout.write(` > `); // prompt user for a response
+	const questionAnswered = answer => {
+		answers.push(answer);
+		if (answers.length < questions.length) { // check if the question was answered and ask next question
+			rl.question(questions[answers.length], questionAnswered);
+		} else {
+			done(answers);
+		}
+	}
+
+	rl.question(firstQuestion, questionAnswered);
 }
 
-ask();
+collectAnswers(questions, answers => {
+	console.log('Thank you for your answers.');
+	console.log(answers);
 
-/* process.stdin*/
-
-const answers = [];
-// add process event listener for input data event
-process.stdin.on('data', data => {
-	answers.push(data.toString().trim())
-	// check if how many questions have been asked
-	if (answers.length < questions.length) {
-		ask(answers.length);
-	} else {
-		process.exit(); // invoke exit
-	}
-});
-
-// listening event for the process exit event
-process.on('exit', () => {
-	// set local variable by array-destructuring
-	const [name, activity, lang] = answers;
-	console.log(`
-	
-	Thank you for your answers!
-	Go ${activity} ${name} you can write ${lang} code later!!
-	
-	`)
+	process.exit();
 })
