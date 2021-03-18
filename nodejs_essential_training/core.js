@@ -8,6 +8,9 @@ const path = require('path');
 
 // const dirUploads = path.join(__dirname, 'www', 'files', 'uploads');
 
+// console.log(dirUploads);
+
+// const util = require('util');
 const {log} = require('util'); // destructure log out of the utils module
 
 log(path.basename(__filename));
@@ -17,9 +20,12 @@ log('^ The name of the current file.')
  would the difference being that we also get the date and time stamped
   to the logged output*/
 
-const v8 = require('v8');
-
-log(v8.getHeapStatistics());
-
+// const v8 = require('v8');
 /* getHeapStatistics is a function available to us from the v8 module*/
+
+const {getHeapStatistics} = require('v8');
+
+
+log(getHeapStatistics());
+
 
