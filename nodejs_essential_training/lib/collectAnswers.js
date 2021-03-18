@@ -5,8 +5,8 @@ const rl = readline.createInterface({
 	output: process.stdout
 });
 
-		// Takes questions
-module.exports = (questions, done) => {
+//                             |--- done is a default function (f is an arbitrary value that does not do anything)
+module.exports = (questions, done = f => f) => {
 	const answers = [];
 	// Destructure the questions
 	const [firstQuestion] = questions;
