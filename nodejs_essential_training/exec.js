@@ -18,4 +18,12 @@ childProcess.exec('ls', (err, data, stderr) => {
 	if (err) throw err;
 	console.log(data, stderr);
 })
+/*So the execute command, I can use to execute any synchronus process. This includes any of our node processes. So I
+can actually run node, readStream, just like I would in the terminal, and we can console log the data that gets returned
+here. And what you'll notice is this time when I run node execute, it's actually running another node JS process,
+readstream. And we actually get to see the data that was returned from that process, right here in the terminal.*/
 
+childProcess.exec('node readStream', (err, data, stderr) => {
+	if (err) throw err;
+	console.log(data, stderr);
+})
