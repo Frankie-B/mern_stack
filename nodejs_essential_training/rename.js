@@ -7,7 +7,7 @@ const fs = require("fs");
 // fs.renameSync('./colors.json', './colors.json')
 
 // asynchronous method
-fs.rename('./colors.json', 'colors.json', err => {
+fs.rename('./colors.json', 'colorsData.json', err => {
 	if (err) throw err;
 	console.log('File renamed successfully.')
 })
